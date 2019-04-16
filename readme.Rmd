@@ -2,12 +2,13 @@
 title: "IIUM Wifi Quality Survery"
 author: "Khairul Fathi"
 output:
-  html_notebook:
-    fig_caption: yes
-    toc: yes
   html_document:
-    df_print: paged
+    fig_caption: yes
+    fig_height: 4
+    fig_width: 6        
     toc: yes
+    toc_float: yes
+    number_sections: yes
 ---
 
 # Introduction
