@@ -1,13 +1,28 @@
 ---
 title: "IIUM Wifi Quality Survery"
-output: html_notebook
+author: "Khairul Fathi"
+output:
+  html_notebook:
+    fig_caption: yes
+    toc: yes
+  html_document:
+    df_print: paged
+    toc: yes
 ---
 
 # Results
+
+Student survey has been conducted for 2 weeks and received 51 total reponses.
 
 Load all required libraries that will be used throughout this analysis.
 ```{r}
 library(plyr)
 library(psych)
 library(plotly)
+```
+
+Start reading both CSV files, from student survey and speedtest result.
+```{r}
+csv_surv <- read.csv('Student_Survey.csv')
+csv_test <- read.csv('Speedtest_Result.csv')
 ```

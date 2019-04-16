@@ -9,6 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="Khairul Fathi" />
 
 
 <title>IIUM Wifi Quality Survery</title>
@@ -239,13 +240,20 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">IIUM Wifi Quality Survery</h1>
+<h4 class="author">Khairul Fathi</h4>
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#results">Results</a></li>
+</ul>
+</div>
 
 <!-- rnb-text-begin -->
 <div id="results" class="section level1">
 <h1>Results</h1>
+<p>Student survey has been conducted for 2 weeks and received 51 total reponses.</p>
 <p>Load all required libraries that will be used throughout this analysis.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -255,9 +263,18 @@ library(psych)
 library(plotly)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Start reading both CSV files, from student survey and speedtest result.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY3N2X3N1cnYgPC0gcmVhZC5jc3YoJ1N0dWRlbnRfU3VydmV5LmNzdicpXG5jc3ZfdGVzdCA8LSByZWFkLmNzdignU3BlZWR0ZXN0X1Jlc3VsdC5jc3YnKVxuYGBgIn0= -->
+<pre class="r"><code>csv_surv &lt;- read.csv('Student_Survey.csv')
+csv_test &lt;- read.csv('Speedtest_Result.csv')</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIklJVU0gV2lmaSBRdWFsaXR5IFN1cnZlcnkiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQojIFJlc3VsdHMNCg0KTG9hZCBhbGwgcmVxdWlyZWQgbGlicmFyaWVzIHRoYXQgd2lsbCBiZSB1c2VkIHRocm91Z2hvdXQgdGhpcyBhbmFseXNpcy4NCmBgYHtyfQ0KbGlicmFyeShwbHlyKQ0KbGlicmFyeShwc3ljaCkNCmxpYnJhcnkocGxvdGx5KQ0KYGBgDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIklJVU0gV2lmaSBRdWFsaXR5IFN1cnZlcnkiDQphdXRob3I6ICJLaGFpcnVsIEZhdGhpIg0Kb3V0cHV0Og0KICBodG1sX25vdGVib29rOg0KICAgIGZpZ19jYXB0aW9uOiB5ZXMNCiAgICB0b2M6IHllcw0KICBodG1sX2RvY3VtZW50Og0KICAgIGRmX3ByaW50OiBwYWdlZA0KICAgIHRvYzogeWVzDQotLS0NCg0KIyBSZXN1bHRzDQoNClN0dWRlbnQgc3VydmV5IGhhcyBiZWVuIGNvbmR1Y3RlZCBmb3IgMiB3ZWVrcyBhbmQgcmVjZWl2ZWQgNTEgdG90YWwgcmVwb25zZXMuDQoNCkxvYWQgYWxsIHJlcXVpcmVkIGxpYnJhcmllcyB0aGF0IHdpbGwgYmUgdXNlZCB0aHJvdWdob3V0IHRoaXMgYW5hbHlzaXMuDQpgYGB7cn0NCmxpYnJhcnkocGx5cikNCmxpYnJhcnkocHN5Y2gpDQpsaWJyYXJ5KHBsb3RseSkNCmBgYA0KDQpTdGFydCByZWFkaW5nIGJvdGggQ1NWIGZpbGVzLCBmcm9tIHN0dWRlbnQgc3VydmV5IGFuZCBzcGVlZHRlc3QgcmVzdWx0Lg0KYGBge3J9DQpjc3Zfc3VydiA8LSByZWFkLmNzdignU3R1ZGVudF9TdXJ2ZXkuY3N2JykNCmNzdl90ZXN0IDwtIHJlYWQuY3N2KCdTcGVlZHRlc3RfUmVzdWx0LmNzdicpDQpgYGA=</div>
 
 
 
