@@ -58,15 +58,14 @@ for(i in 1:nrow(tmpstud))
 dfstudentB <- data.frame(Respondent, Programme, SSID, Mahallah, Usage, Satisfaction, Duration, Speed, Disconnected, Coverage, stringsAsFactors = TRUE)
 dfstudentA <- unique(dfstudentB[, -5]) # minus Usage and retrieve only unique records
 
-# bar - Level of Satisfaction
-dfsatisfaction <- count(unique(dfstud[, c(1,6)])[, 2])
-dfsatisfaction$x[dfsatisfaction$x == 1] <- "Very Dissatisfied"
-dfsatisfaction$x[dfsatisfaction$x == 2] <- "Dissatisfied"
-dfsatisfaction$x[dfsatisfaction$x == 3] <- "Satisfied"
-dfsatisfaction$x[dfsatisfaction$x == 4] <- "Very Satisfied"
 
-plot_ly(x = dfsatisfaction$x, y = dfsatisfaction$freq, type = "bar") %>%
-layout(title = 'Overall Level of Satisfaction', yaxis = list(title = "Respondent"), xaxis = list(title = "Satisfaction Level"))
+# High level summary of Student Survey responses
+dfSummary(dfstudentA[, -1], max.distinct.values = 15, plain.ascii = FALSE, style = "grid", graph.magnif = 0.75, valid.col = FALSE, tmp.img.dir = "./img")
+
+# pie - Primary Usage of Internet
+dfusage <- count(dfstudentB$Usage)
+plot_ly(dfusage, labels = dfusage$x,values = ~dfusage$freq, type = 'pie') %>% 
+layout(title = 'Primary Usage of Internet', xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE), yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 
 # stacked bar - Level of Satisfaction by Mahallah
 dfsatisfaction <- unique(dfstud[, c(1,4,6)])
@@ -82,8 +81,3 @@ add_trace(y = ~Dissatisfied, name = 'Dissatisfied') %>%
 add_trace(y = ~Satisfied, name = 'Satisfied') %>%
 add_trace(y = ~VerySatisfied, name = 'Very Satisfied') %>%
 layout(title = 'Level of Satisfaction by Mahallah', yaxis = list(title = 'Count'), barmode = 'stack')
-
-
-# pie - Primary Usage of Internet
-plot_ly(dfusage, labels = rownames(dfusage),values = ~dfusage$freq, type = 'pie') %>% 
-layout(title = 'Primary Usage of Internet', xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE), yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
