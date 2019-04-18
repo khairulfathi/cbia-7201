@@ -82,3 +82,11 @@ plot_ly(dfsatisfaction2, x = ~Mahallah, y = ~VeryDissatisfied, type = 'bar', nam
   add_trace(y = ~Satisfied, name = 'Satisfied') %>%
   add_trace(y = ~VerySatisfied, name = 'Very Satisfied') %>%
   layout(title = 'Level of Satisfaction by Mahallah', yaxis = list(title = 'Count'), barmode = 'stack')
+
+# summary - speedtest
+dfsummary <- dftest %>% 
+  group_by(Mahallah) %>%
+  summarise(Download = mean(Download), Upload = mean(Upload), Ping = mean(Ping), Jitter = mean(Jitter))
+
+dfsummary <- dfsummary[order(-dfsummary$Download), ]
+View(dfsummary)
