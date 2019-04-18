@@ -10,7 +10,7 @@ csv_test <- read.csv('Speedtest_Result.csv')
 
 # rename variables name for easier reference
 tmpstud <- plyr::rename(csv_surv, c(Academic.Programme = "Programme", Internet.Connection.Method = "SSID", Main.Usage.of.Internet = "Usage", On.overall.basis..how.satisfied.are.you.with.wireless.internet.connection.provided.by.IIUM. = "Satisfaction", Propose.a.solution.to.improve.IIUM.WIFI.services. = "Comment", Average.Duration.of.Daily.Use.of.Internet = "Duration", How.many.times.have.your.Internet.connection.been.suddenly.disconnected.or.face.intermittent.connection.in.past.3.days. = "Disconnected", Is.WiFi.coverage.adequate.and.within.acceptable.signal.strength. = "Coverage", How.satisfied.are.you.with.the.network.speed.to.achieve.your.main.usages. = "Speed"))
-tmptest <- plyr::rename(csv_test, c(Submission.Date = "Timestamp", WiFi.SSID = "SSID", Download.Speed..Mbps. = "DLSpeed", Download.Size..MB. = "DLSize", Upload.Speed..Mbps. = "UPSpeed", Upload.Size..MB. = "UPSize", Ping..ms. = "Ping", Jitter..ms. = "Jitter", Loss.... = "Loss", Signal.Strength..dBm. = "Signal"))
+tmptest <- plyr::rename(csv_test, c(Mahallah.Dept = "Mahallah", Download.Mbps = "Download", Upload.Mbps = "Upload", Ping.ms = "Ping", Jitter.ms = "Jitter", Loss.. = "Loss"))
 
 # filter test records and removed unwanted variables
 tmpstud <- tmpstud[which(tmpstud$Gender == ''), ]
@@ -19,6 +19,8 @@ tmpstud$Usage[7] <- "Study and assignment, Topic and subject research, Casual br
 tmpstud$Usage <- strsplit(as.character(tmpstud$Usage), ",")
 tmpstud$Satisfaction <- ifelse(tmpstud$Satisfaction == 1, "Very Dissatisfied", ifelse(tmpstud$Satisfaction == 2, "Dissatisfied", ifelse(tmpstud$Satisfaction == 3, "Satisfied", "Very Satisfied")))
 tmpstud$Speed <- ifelse(tmpstud$Speed == 1, "Very Dissatisfied", ifelse(tmpstud$Speed == 2, "Dissatisfied", ifelse(tmpstud$Speed == 3, "Satisfied", "Very Satisfied")))
+
+tmptest$Loss <- 0
 
 # start to process final data frame
 k <- 1
@@ -57,6 +59,8 @@ for(i in 1:nrow(tmpstud))
 # finalized data frame
 dfstudentB <- data.frame(Respondent, Programme, SSID, Mahallah, Usage, Satisfaction, Duration, Speed, Disconnected, Coverage, stringsAsFactors = TRUE)
 dfstudentA <- unique(dfstudentB[, -5]) # minus Usage and retrieve only unique records
+
+dftest <- tmptest
 
 # High level summary of Student Survey responses
 dfSummary(dfstudentA[, -1], max.distinct.values = 15, plain.ascii = FALSE, style = "grid", graph.magnif = 0.75, valid.col = FALSE, tmp.img.dir = "./img")
