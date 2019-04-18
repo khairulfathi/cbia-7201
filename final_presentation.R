@@ -58,26 +58,23 @@ for(i in 1:nrow(tmpstud))
 dfstudentB <- data.frame(Respondent, Programme, SSID, Mahallah, Usage, Satisfaction, Duration, Speed, Disconnected, Coverage, stringsAsFactors = TRUE)
 dfstudentA <- unique(dfstudentB[, -5]) # minus Usage and retrieve only unique records
 
-
 # High level summary of Student Survey responses
 dfSummary(dfstudentA[, -1], max.distinct.values = 15, plain.ascii = FALSE, style = "grid", graph.magnif = 0.75, valid.col = FALSE, tmp.img.dir = "./img")
 
 # pie - Primary Usage of Internet
 dfusage <- count(dfstudentB$Usage)
 plot_ly(dfusage, labels = dfusage$x,values = ~dfusage$freq, type = 'pie') %>% 
-layout(title = 'Primary Usage of Internet', xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE), yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+  layout(title = 'Primary Usage of Internet', xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE), yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 
 # stacked bar - Level of Satisfaction by Mahallah
-dfsatisfaction <- unique(dfstud[, c(1,4,6)])
-dfsatisfaction <- aggregate(dfsatisfaction, by = list(dfsatisfaction$Mahallah, dfsatisfaction$Satisfaction), FUN = length, simplify = TRUE)
-dfsatisfaction$Respondent <- dfsatisfaction$Satisfaction <- NULL
+dfsatisfaction <- aggregate(dfstudentA[ , c(4,5)], by = list(dfstudentA$Mahallah, dfstudentA$Satisfaction), FUN = length, simplify = TRUE)
 dfsatisfaction <- plyr::rename(dfsatisfaction, c(Mahallah = "Count", Group.1 = "Mahallah", Group.2 = "Level"))
-dfsatisfaction <- dfsatisfaction[order(dfsatisfaction$Mahallah, dfsatisfaction$Level), ]
+dfsatisfaction$Satisfaction <- NULL
 dfsatisfaction <- reshape(dfsatisfaction, timevar = "Level", idvar = "Mahallah", direction = "wide")
-dfsatisfaction <- plyr::rename(dfsatisfaction, c(Count.1 = "VeryDissatisfied", Count.2 = "Dissatisfied", Count.3 = "Satisfied", Count.4 = "VerySatisfied"))
+dfsatisfaction <- plyr::rename(dfsatisfaction, c("Count.Very Dissatisfied" = "VeryDissatisfied", "Count.Dissatisfied" = "Dissatisfied", "Count.Satisfied" = "Satisfied", "Count.Very Satisfied" = "VerySatisfied"))
 
-plot_ly(dfsatisfaction, x = ~Mahallah, y = ~VeryDissatisfied, type = 'bar', name = 'Very Dissatisfied') %>%
-add_trace(y = ~Dissatisfied, name = 'Dissatisfied') %>%
-add_trace(y = ~Satisfied, name = 'Satisfied') %>%
-add_trace(y = ~VerySatisfied, name = 'Very Satisfied') %>%
-layout(title = 'Level of Satisfaction by Mahallah', yaxis = list(title = 'Count'), barmode = 'stack')
+plot_ly(dfsatisfaction2, x = ~Mahallah, y = ~VeryDissatisfied, type = 'bar', name = 'Very Dissatisfied') %>%
+  add_trace(y = ~Dissatisfied, name = 'Dissatisfied') %>%
+  add_trace(y = ~Satisfied, name = 'Satisfied') %>%
+  add_trace(y = ~VerySatisfied, name = 'Very Satisfied') %>%
+  layout(title = 'Level of Satisfaction by Mahallah', yaxis = list(title = 'Count'), barmode = 'stack')
