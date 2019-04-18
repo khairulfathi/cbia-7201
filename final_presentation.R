@@ -2,9 +2,7 @@
 library(plyr)
 library(psych)
 library(plotly)
-
-# user defined functions
-summarise.factor <- function(x) { cbind(freq = table(x), percentage = prop.table(table(x))*100) } # summarise factor with percentage
+library(summarytools)
 
 # start to read both CSV files
 csv_surv <- read.csv('Student_Survey.csv')
@@ -19,18 +17,20 @@ tmpstud <- tmpstud[which(tmpstud$Gender == ''), ]
 tmpstud$Timestamp <- tmpstud$Gender <- tmpstud$Comment <- NULL
 tmpstud$Usage[7] <- "Study and assignment, Topic and subject research, Casual browsing"
 tmpstud$Usage <- strsplit(as.character(tmpstud$Usage), ",")
+tmpstud$Satisfaction <- ifelse(tmpstud$Satisfaction == 1, "Very Dissatisfied", ifelse(tmpstud$Satisfaction == 2, "Dissatisfied", ifelse(tmpstud$Satisfaction == 3, "Satisfied", "Very Satisfied")))
+tmpstud$Speed <- ifelse(tmpstud$Speed == 1, "Very Dissatisfied", ifelse(tmpstud$Speed == 2, "Dissatisfied", ifelse(tmpstud$Speed == 3, "Satisfied", "Very Satisfied")))
 
 # start to process final data frame
 k <- 1
 
-Respondent <- integer()
+Respondent <- character()
 Programme <- character()
 SSID <- character()
 Mahallah <- character()
 Usage <- character()
-Satisfaction <- integer()
+Satisfaction <- character()
 Duration <- character()
-Speed <- integer()
+Speed <- character()
 Disconnected <- character()
 Coverage <- character()
 
@@ -44,9 +44,9 @@ for(i in 1:nrow(tmpstud))
     SSID[k] <- as.character(tmpstud$SSID[i])
     Mahallah[k] <- as.character(tmpstud$Mahallah[i])
     Usage[k] <- trimws(tmpstud$Usage[[i]][j]) # trim leading and trailing whitespace
-    Satisfaction[k] <- tmpstud$Satisfaction[i]
+    Satisfaction[k] <- as.character(tmpstud$Satisfaction[i])
     Duration[k] <- as.character(tmpstud$Duration[i])
-    Speed[k] <- tmpstud$Speed[i]
+    Speed[k] <- as.character(tmpstud$Speed[i])
     Disconnected[k] <- as.character(tmpstud$Disconnected[i])
     Coverage[k] <- as.character(tmpstud$Coverage[i])
     
@@ -55,11 +55,8 @@ for(i in 1:nrow(tmpstud))
 }
 
 # finalized data frame
-dfstud <- data.frame(Respondent, Programme, SSID, Mahallah, Usage, Satisfaction, Duration, Speed, Disconnected, Coverage, stringsAsFactors = FALSE)
-
-# summarise meaningful variables
-dfusage <- as.data.frame(summarise.factor(dfstud$Usage))
-dfusage <- dfusage[order(-dfusage$percentage), ]
+dfstudentB <- data.frame(Respondent, Programme, SSID, Mahallah, Usage, Satisfaction, Duration, Speed, Disconnected, Coverage, stringsAsFactors = TRUE)
+dfstudentA <- unique(dfstudentB[, -5]) # minus Usage and retrieve only unique records
 
 # bar - Level of Satisfaction
 dfsatisfaction <- count(unique(dfstud[, c(1,6)])[, 2])
