@@ -63,7 +63,7 @@ dfstudentA <- unique(dfstudentB[, -5]) # minus Usage and retrieve only unique re
 dftest <- tmptest
 
 # High level summary of Student Survey responses
-dfSummary(dfstudentA[, -1], max.distinct.values = 15, plain.ascii = FALSE, style = "grid", graph.magnif = 0.75, valid.col = FALSE, tmp.img.dir = "./img")
+dfSummary(dfstudentA[, -1], max.distinct.values = 15, plain.ascii = FALSE, style = "grid", graph.magnif = 0.75, valid.col = FALSE, tmp.img.dir = "./img", na.col = FALSE)
 
 # pie - Primary Usage of Internet
 dfusage <- count(dfstudentB$Usage)
@@ -83,7 +83,10 @@ plot_ly(dfsatisfaction2, x = ~Mahallah, y = ~VeryDissatisfied, type = 'bar', nam
   add_trace(y = ~VerySatisfied, name = 'Very Satisfied') %>%
   layout(title = 'Level of Satisfaction by Mahallah', yaxis = list(title = 'Count'), barmode = 'stack')
 
-# summary - speedtest
+# High level summary of Speedtest result
+dfSummary(dftest[ , c(2, 3, 4, 5)], max.distinct.values = 15, plain.ascii = FALSE, style = "grid", graph.magnif = 0.75, valid.col = FALSE, tmp.img.dir = "./img", na.col = FALSE)
+
+# Speedtest summary by Mahallah
 dfsummary <- dftest %>% 
   group_by(Mahallah) %>%
   summarise(Download = mean(Download), Upload = mean(Upload), Ping = mean(Ping), Jitter = mean(Jitter))
