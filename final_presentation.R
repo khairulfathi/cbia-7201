@@ -95,4 +95,4 @@ dfsummary <- dfsummary[order(-dfsummary$Download), ]
 View(dfsummary)
 
 # Scatter - Download ~ Strength
-plot_ly(data = dftest, x = ~Strength, y = ~Download, type = "scatter", text = ~paste(Mahallah))
+plot_ly(data = dftest, x = ~Strength, y = ~Download, type = "scatter", text = ~paste(Mahallah), color = ~Download, size = ~Download)
