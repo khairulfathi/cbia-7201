@@ -1,4 +1,31 @@
-"Submission Date","Mahallah","WiFi SSID","Download Speed (Mbps)","Download Size (MB)","Upload Speed (Mbps)","Upload Size (MB)","Ping (ms)","Jitter (ms)","Loss (%)","Signal Strength (dBm)","Geolocation"
-"2019-04-13 09:27:16","Sumayyah","Student","13.2","22.2","1.57","1.48","42","49","0"," -80","3.227470, 101.703028"
-"2019-04-13 09:26:25","Zubair","Student","103","170","39.6","49.1","7","2","0.9"," -70","3.227458, 101.703019"
-"2019-04-13 09:25:46","Zubair","Student","319","536","101","30.8","5","0","0"," -54","3.227458, 101.703019"
+Mahallah/Dept,Download Mbps,Upload Mbps,Ping ms,Jitter ms,Loss %,Strength
+KICT,14.7,19,6,3.4,-,-64
+KICT,16.9,14.9,5,1,-,-61
+KICT,17.3,14.1,5,4,-,-66
+Ameenah,2.03,2.94,11,110,-,-73
+Ameenah,1.19,7.94,7,35,-,-68
+Ameenah,10.1,12.4,5,190,-,-65
+Ruqayyah,0.06,0.01,8,596,-,-79
+Ruqayyah,0.9,2.01,9,211,-,-81
+Ruqayyah,1.54,0.57,9,120,-,-69
+Nusaibah,19.1,32.4,38,5,-,-60
+Nusaibah,25.3,37,32,15,-,-67
+Nusaibah,32.6,35.8,7,7,-,-65
+Sumayyah,1.2,0.24,50,10,-,-74
+Sumayyah,2.36,12.4,32,8,-,-70
+Sumayyah,2.64,12,41,8,-,-69
+Salahuddin,0.22,1.83,39,65,-,-76
+Salahuddin,1.09,3.98,37,150,-,-75
+Salahuddin,0.54,5.9,25,636,-,-76
+Uthman,4.07,1.29,258,214,-,-40
+Uthman,6.4,2.28,59,93,-,-43
+Uthman,16.4,8.82,30,5,-,-32
+Zubair,21.7,13.6,7,0.84,-,-60
+Zubair,11.7,13.5,7,5,-,-64
+Zubair,12.8,5.81,7,5,-,-59
+Safiyyah,1.51,8.61,11,4,-,-67
+Safiyyah,2.02,11.1,5,2,-,-65
+Safiyyah,0.39,3.9,10,13,-,-58
+Ali,0.45,0.77,16,6,-,-72
+Ali,0.47,0.01,24,80,-,-70
+Ali,2.12,3.5,17,6,-,-71
