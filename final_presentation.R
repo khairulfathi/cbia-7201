@@ -95,4 +95,9 @@ dfsummary <- dfsummary[order(-dfsummary$Download), ]
 View(dfsummary)
 
 # Scatter - Download ~ Strength
-plot_ly(data = dftest, x = ~Strength, y = ~Download, type = "scatter", text = ~paste(Mahallah), color = ~Download, size = ~Download)
+fv <- dftest %>% lm(Download ~ Strength,.) %>% fitted.values()
+summary(lm(Download ~ Strength, data = dftest))
+
+plot_ly(data = dftest, x = ~Strength, y = ~Download, type = "scatter", text = ~paste(Mahallah), color = ~Download, size = ~Download) %>% 
+  add_trace(x = ~Strength, y = fv, mode = "lines") %>% 
+  layout(showlegend = F, annotions)
