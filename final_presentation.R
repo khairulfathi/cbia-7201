@@ -62,6 +62,8 @@ dfstudentA <- unique(dfstudentB[, -5]) # minus Usage and retrieve only unique re
 
 dftest <- tmptest
 
+dfcombined <- merge(dfstudentA[ , c(4, 5, 7, 8)], aggregate(dftest[, 2:7], list(Mahallah = dftest$Mahallah), mean))
+
 # High level summary of Student Survey responses
 dfSummary(dfstudentA[, -1], max.distinct.values = 15, plain.ascii = FALSE, style = "grid", graph.magnif = 0.75, valid.col = FALSE, tmp.img.dir = "./img", na.col = FALSE)
 
