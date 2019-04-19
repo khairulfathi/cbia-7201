@@ -64,6 +64,8 @@ dftest <- tmptest
 
 dfcombined <- merge(dfstudentA[ , c(4, 5, 7, 8)], aggregate(dftest[, 2:7], list(Mahallah = dftest$Mahallah), mean))
 
+dfcombined$Signal <- ifelse(between(dfcombined$Strength, -50, 0), "Excellent", ifelse(between(dfcombined$Strength, -60,-51), "Good", ifelse(between(dfcombined$Strength, -70,-61), "Fair", "Weak")))
+
 # High level summary of Student Survey responses
 dfSummary(dfstudentA[, -1], max.distinct.values = 15, plain.ascii = FALSE, style = "grid", graph.magnif = 0.75, valid.col = FALSE, tmp.img.dir = "./img", na.col = FALSE)
 
@@ -103,3 +105,6 @@ summary(lm(Download ~ Strength, data = dftest))
 plot_ly(data = dftest, x = ~Strength, y = ~Download, type = "scatter", text = ~paste(Mahallah), color = ~Download, size = ~Download) %>% 
   add_trace(x = ~Strength, y = fv, mode = "lines") %>% 
   layout(showlegend = F, annotions)
+
+# Chi-squared - Speed~Signal
+chisq.test(table(dfcombined$Speed, dfcombined$Signal), simulate.p.value = TRUE)
