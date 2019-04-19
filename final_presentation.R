@@ -106,5 +106,8 @@ plot_ly(data = dftest, x = ~Strength, y = ~Download, type = "scatter", text = ~p
   add_trace(x = ~Strength, y = fv, mode = "lines") %>% 
   layout(showlegend = F, annotions)
 
+# Correlation Matrix - dftest
+plot_ly(x = names(dftest[ , c(-1, -6)]), y = names(dftest[ , c(-1, -6)]), z = cor(dftest[, c(-1, -6)]), type = "heatmap")
+
 # Chi-squared - Speed~Signal
 chisq.test(table(dfcombined$Speed, dfcombined$Signal), simulate.p.value = TRUE)
