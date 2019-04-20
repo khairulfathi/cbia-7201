@@ -81,7 +81,7 @@ dfsatisfaction$Satisfaction <- NULL
 dfsatisfaction <- reshape(dfsatisfaction, timevar = "Level", idvar = "Mahallah", direction = "wide")
 dfsatisfaction <- plyr::rename(dfsatisfaction, c("Count.Very Dissatisfied" = "VeryDissatisfied", "Count.Dissatisfied" = "Dissatisfied", "Count.Satisfied" = "Satisfied", "Count.Very Satisfied" = "VerySatisfied"))
 
-plot_ly(dfsatisfaction2, x = ~Mahallah, y = ~VeryDissatisfied, type = 'bar', name = 'Very Dissatisfied') %>%
+plot_ly(dfsatisfaction, x = ~Mahallah, y = ~VeryDissatisfied, type = 'bar', name = 'Very Dissatisfied') %>%
   add_trace(y = ~Dissatisfied, name = 'Dissatisfied') %>%
   add_trace(y = ~Satisfied, name = 'Satisfied') %>%
   add_trace(y = ~VerySatisfied, name = 'Very Satisfied') %>%
