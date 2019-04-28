@@ -1,5 +1,6 @@
 # load required libraries
 library(plyr)
+library(dplyr)
 library(psych)
 library(plotly)
 library(summarytools)
@@ -104,10 +105,13 @@ summary(lm(Download ~ Strength, data = dftest))
 
 plot_ly(data = dftest, x = ~Strength, y = ~Download, type = "scatter", text = ~paste(Mahallah), color = ~Download, size = ~Download) %>% 
   add_trace(x = ~Strength, y = fv, mode = "lines") %>% 
-  layout(showlegend = F, annotions)
+  layout(showlegend = F)
+
+summary(lm(dftest$Download~dftest$Strength))$r.squared
 
 # Correlation Matrix - dftest
 plot_ly(x = names(dftest[ , c(-1, -6)]), y = names(dftest[ , c(-1, -6)]), z = cor(dftest[, c(-1, -6)]), type = "heatmap")
 
 # Chi-squared - Speed~Signal
 chisq.test(table(dfcombined$Speed, dfcombined$Signal), simulate.p.value = TRUE)
+
